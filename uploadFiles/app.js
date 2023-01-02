@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
+// 中间件
 app.post(
   "/upload",
   fileUpload({ createParentPath: true }),
