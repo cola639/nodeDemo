@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test CORS</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <h1 id="showCORS"></h1>
+    <input type="button" value="testCORS" onclick="getText()" />
+  </body>
+  <script>
+    const getText = () => {
+      let url = 'http://localhost:3300/api/user'
+      axios({
+        url,
+        method: 'get'
+      })
+        .then(res => {
+          console.log('🚀 >> res', res.data)
+          const h1 = document.getElementById('showCORS')
+          h1.textContent = res.data?.msg
+        })
+        .catch(() => {})
+    }
+  </script>
+</html>

@@ -1,43 +1,43 @@
-const express = require("express");
-const fileUpload = require("express-fileupload");
-const path = require("path");
+const express = require('express')
+const fileUpload = require('express-fileupload')
+const path = require('path')
 
-const filesPayloadExists = require("./middleware/filesPayloadExists");
-const fileExtLimiter = require("./middleware/fileExtLimiter");
-const fileSizeLimiter = require("./middleware/fileSizeLimiter");
+const filesPayloadExists = require('./middleware/filesPayloadExists')
+const fileExtLimiter = require('./middleware/fileExtLimiter')
+const fileSizeLimiter = require('./middleware/fileSizeLimiter')
 
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.PORT || 3500
 
-const app = express();
+const app = express()
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 // 中间件
 app.post(
-  "/upload",
+  '/upload',
   fileUpload({ createParentPath: true }),
   filesPayloadExists,
-  fileExtLimiter([".png", ".jpg", ".jpeg"]),
+  fileExtLimiter(['.png', '.jpg', '.jpeg']),
   fileSizeLimiter,
   (req, res) => {
-    const files = req.files;
-    console.log(files);
+    const files = req.files
+    console.log(files)
 
-    Object.keys(files).forEach((key) => {
-      const filepath = path.join(__dirname, "files", files[key].name);
-      files[key].mv(filepath, (err) => {
+    Object.keys(files).forEach(key => {
+      const filepath = path.join(__dirname, 'files', files[key].name)
+      files[key].mv(filepath, err => {
         // error
-        if (err) return res.status(500).json({ status: "error", message: err });
-      });
-    });
+        if (err) return res.status(500).json({ status: 'error', message: err })
+      })
+    })
 
     return res.json({
-      status: "success",
-      message: Object.keys(files).toString(),
-    });
+      status: 'success',
+      message: Object.keys(files).toString()
+    })
   }
-);
+)
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
