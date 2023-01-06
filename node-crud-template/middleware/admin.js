@@ -1,9 +1,8 @@
-
-module.exports = function (req, res, next) { 
+module.exports = function (req, res, next) {
   // 401 Unauthorized
-  // 403 Forbidden 
-  
-  if (!req.user.isAdmin) return res.status(403).send('Access denied.');
+  // 403 Forbidden
 
-  next();
+  if (!req.user.isAdmin) return res.status(403).send('Access denied.')
+
+  next()
 }
