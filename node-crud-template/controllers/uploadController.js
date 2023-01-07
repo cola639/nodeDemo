@@ -5,7 +5,8 @@ const saveFile = (req, res) => {
   console.log(files)
 
   Object.keys(files).forEach(key => {
-    const filepath = path.join(__dirname, 'static', files[key].name)
+    const filepath = path.join(__dirname, '../static', files[key].name)
+    console.log('🚀  filepath', filepath)
     files[key].mv(filepath, err => {
       // error
       if (err) return res.status(500).json({ status: 'error', message: err })

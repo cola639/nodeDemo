@@ -8,11 +8,12 @@ const fileSizeLimiter = require('../middleware/files/fileSizeLimiter')
 const uploadController = require('../controllers/uploadController')
 
 router.post(
-  '/upload',
-  auth,
+  '/',
   fileUpload({ createParentPath: true }),
   filesPayloadExists,
   fileExtLimiter(['.png', '.jpg', '.jpeg']),
   fileSizeLimiter,
   uploadController.saveFile
 )
+
+module.exports = router

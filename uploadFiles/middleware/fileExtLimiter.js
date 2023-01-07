@@ -1,31 +1,29 @@
-const path = require("path");
+const path = require('path')
+console.log('🚀 >> path', path)
 
-const fileExtLimiter = (allowedExtArray) => {
+const fileExtLimiter = allowedExtArray => {
   return (req, res, next) => {
-    const files = req.files;
+    const files = req.files
 
-    const fileExtensions = [];
-    Object.keys(files).forEach((key) => {
-      fileExtensions.push(path.extname(files[key].name));
-    });
+    const fileExtensions = []
+    Object.keys(files).forEach(key => {
+      fileExtensions.push(path.extname(files[key].name))
+    })
 
     // Are the file extension allowed?
-    const allowed = fileExtensions.every((ext) =>
-      allowedExtArray.includes(ext)
-    );
+    const allowed = fileExtensions.every(ext => allowedExtArray.includes(ext))
 
     if (!allowed) {
-      const message =
-        `Upload failed. Only ${allowedExtArray.toString()} files allowed.`.replaceAll(
-          ",",
-          ", "
-        );
+      const message = `Upload failed. Only ${allowedExtArray.toString()} files allowed.`.replaceAll(
+        ',',
+        ', '
+      )
 
-      return res.status(422).json({ status: "error", message });
+      return res.status(422).json({ status: 'error', message })
     }
 
-    next();
-  };
-};
+    next()
+  }
+}
 
-module.exports = fileExtLimiter;
+module.exports = fileExtLimiter
