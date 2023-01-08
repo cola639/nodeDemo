@@ -8,7 +8,9 @@ const rentals = require('../routes/rentals')
 const users = require('../routes/users')
 const auth = require('../routes/auth')
 const returns = require('../routes/returns')
+const captcha = require('../routes/captcha')
 const upload = require('../routes/upload')
+const md = require('../routes/md')
 const error = require('../middleware/error')
 
 module.exports = function (app) {
@@ -22,5 +24,7 @@ module.exports = function (app) {
   app.use('/api/auth', auth)
   app.use('/api/returns', returns)
   app.use('/api/upload', upload)
+  app.use('/api/captcha', captcha)
+  app.use('/api/md', md)
   app.use(error)
 }
