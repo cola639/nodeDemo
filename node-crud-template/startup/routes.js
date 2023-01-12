@@ -12,7 +12,7 @@ const returns = require('../routes/returns')
 const captcha = require('../routes/captcha')
 const upload = require('../routes/upload')
 const md = require('../routes/md')
-const error = require('../middleware/error')
+const notFound = require('../middleware/notFound')
 
 module.exports = function (app) {
   app.use(express.json())
@@ -28,5 +28,5 @@ module.exports = function (app) {
   app.use('/api/upload', upload)
   app.use('/api/captcha', captcha)
   app.use('/api/md', md)
-  app.use(error)
+  app.all('*', notFound)
 }
