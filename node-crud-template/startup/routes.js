@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const corsOptions = require('../config/corsOptions')
+const staticOptions = require('../config/staticOptions')
 const genres = require('../routes/genres')
 const customers = require('../routes/customers')
 const movies = require('../routes/movies')
@@ -16,6 +17,7 @@ const error = require('../middleware/error')
 module.exports = function (app) {
   app.use(express.json())
   app.use(cors(corsOptions))
+  app.use('/static', express.static('static', staticOptions)) // config accessible static
   app.use('/api/genres', genres)
   app.use('/api/customers', customers)
   app.use('/api/movies', movies)

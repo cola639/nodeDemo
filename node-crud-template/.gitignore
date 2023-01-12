@@ -1,5 +1,6 @@
 /node_modules
 /package-lock.json
-/logger
+/logs
 ## 上传文件存放目录
 /static 
+/testPages
