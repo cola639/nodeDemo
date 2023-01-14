@@ -3,7 +3,6 @@ const express = require('express')
 const app = express()
 const logger = require('./utils/logger')
 
-// require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')() // 引入自启动函数

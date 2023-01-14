@@ -37,9 +37,12 @@ const logger = createLogger({
   format: combine(timestamp({ format: timezone }), myFormat),
   transports: [
     new transports.Console({ colorize: true, prettyPrint: false }),
-    new transports.File({ filename: `./logs/${dayjs().format('YYYY-MM-DD')}.log`, level: 'info' }),
     new transports.File({
-      filename: `./logs/${dayjs().format('YYYY-MM-DD')}_http.log`,
+      filename: `./logs/${dayjs().format('YYYY-MM-DD')}_info.log`,
+      level: 'info'
+    }),
+    new transports.File({
+      filename: `./logs/${dayjs().format('YYYY-MM-DD')}_reqLog.log`,
       level: 'http'
     }),
     new transports.File({
