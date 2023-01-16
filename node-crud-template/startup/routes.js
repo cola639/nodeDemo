@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 const corsOptions = require('../config/corsOptions')
 const staticOptions = require('../config/staticOptions')
 const logging = require('./logging')
@@ -16,9 +17,11 @@ const md = require('../routes/md')
 const notFound = require('../middleware/notFound')
 
 module.exports = function (app) {
-  app.use(express.json())
-  app.use(cors(corsOptions))
   app.use(logging)
+  app.use(cors(corsOptions)) // CORS
+  app.use(express.urlencoded({ extended: false })) // content-type formdata
+  app.use(express.json()) // content-type json
+  app.use(cookieParser()) // cookie add to req obj
   app.use('/static', express.static('static', staticOptions)) // config accessible static
   app.use('/api/genres', genres)
   app.use('/api/customers', customers)
