@@ -1,5 +1,4 @@
 const path = require('path')
-console.log('🚀 >> path', path)
 
 const fileExtLimiter = allowedExtArray => {
   return (req, res, next) => {
