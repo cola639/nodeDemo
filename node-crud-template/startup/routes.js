@@ -17,7 +17,7 @@ const md = require('../routes/md')
 const notFound = require('../middleware/notFound')
 
 module.exports = function (app) {
-  app.use(logging)
+  app.use(logging) // logging http
   app.use(cors(corsOptions)) // CORS
   app.use(express.urlencoded({ extended: false })) // content-type formdata
   app.use(express.json()) // content-type json
@@ -33,5 +33,5 @@ module.exports = function (app) {
   app.use('/api/upload', upload)
   app.use('/api/captcha', captcha)
   app.use('/api/md', md)
-  app.all('*', notFound)
+  app.all('*', notFound) // not found handle
 }
