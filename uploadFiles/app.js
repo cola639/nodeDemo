@@ -1,12 +1,13 @@
+const path = require('path')
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const path = require('path')
+const { v4: uuidv4 } = require('uuid')
 
 const filesPayloadExists = require('./middleware/filesPayloadExists')
 const fileExtLimiter = require('./middleware/fileExtLimiter')
 const fileSizeLimiter = require('./middleware/fileSizeLimiter')
 
-const PORT = process.env.PORT || 3500
+const PORT = process.env.PORT || 3600
 
 const app = express()
 
@@ -26,7 +27,8 @@ app.post(
     console.log(files)
 
     Object.keys(files).forEach(key => {
-      const filepath = path.join(__dirname, 'files', files[key].name)
+      const filename = new Date().getTime() + uuidv4() + files[key].name
+      const filepath = path.join(__dirname, 'files', filename)
       files[key].mv(filepath, err => {
         // error
         if (err) return res.status(500).json({ status: 'error', message: err })
