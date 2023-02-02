@@ -1,7 +1,7 @@
 const path = require('path')
 const express = require('express')
 const fileUpload = require('express-fileupload')
-const { v4: uuidv4 } = require('uuid')
+const { v1: uuidv1 } = require('uuid')
 
 const filesPayloadExists = require('./middleware/filesPayloadExists')
 const fileExtLimiter = require('./middleware/fileExtLimiter')
@@ -24,10 +24,10 @@ app.post(
   fileSizeLimiter,
   (req, res) => {
     const files = req.files
-    console.log(files)
+    // console.log(files)
 
     Object.keys(files).forEach(key => {
-      const filename = new Date().getTime() + uuidv4() + files[key].name
+      const filename = new Date().getTime() + uuidv1() + files[key].name
       const filepath = path.join(__dirname, 'files', filename)
       files[key].mv(filepath, err => {
         // error
