@@ -6,6 +6,7 @@ const { v1: uuidv1 } = require('uuid')
 const filesPayloadExists = require('./middleware/filesPayloadExists')
 const fileExtLimiter = require('./middleware/fileExtLimiter')
 const fileSizeLimiter = require('./middleware/fileSizeLimiter')
+const fileAmountLimiter = require('./middleware/fileAmountLimiter')
 
 const PORT = process.env.PORT || 3600
 
@@ -20,6 +21,7 @@ app.post(
   '/upload',
   fileUpload({ createParentPath: true }),
   filesPayloadExists,
+  fileAmountLimiter,
   fileExtLimiter(['.png', '.jpg', '.jpeg']),
   fileSizeLimiter,
   (req, res) => {

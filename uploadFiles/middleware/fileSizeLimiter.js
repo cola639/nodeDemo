@@ -1,13 +1,8 @@
-const LimitNum = 3 // limit amount
 const MB = 5 // 5 MB Size
 const FILE_SIZE_LIMIT = MB * 1024 * 1024
 
 const fileSizeLimiter = (req, res, next) => {
   const { files } = req
-  const filesAmount = Object.keys(files).length
-
-  if (filesAmount > LimitNum)
-    return res.status(413).json({ status: 'error', message: 'upload imgs over numbers' })
 
   const filesOverLimit = []
   // Which files are over the limit?
