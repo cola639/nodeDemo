@@ -1,0 +1,4 @@
+{
+  "jwtPrivateKey": "unsecureKey",
+  "port": "3300"
+}
